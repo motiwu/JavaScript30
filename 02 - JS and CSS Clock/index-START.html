@@ -62,12 +62,47 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: right;
     }
 
   </style>
 
   <script>
+    var currentTime = {
+      hour: '',
+      min: '',
+      second: '',
+    };
+    const hands = {
+      hour: document.getElementsByClassName('hour-hand')[0],
+      min: document.getElementsByClassName('min-hand')[0],
+      second: document.getElementsByClassName('second-hand')[0],
+    }
 
+    function getTime() {
+      let newTime = new Date();
+      currentTime = {
+        hour: newTime.getHours(),
+        min: newTime.getMinutes(),
+        second: newTime.getSeconds(),
+      };
+    }
+
+    function setClockStyle() {
+      hands.hour.style.transform = `rotate(${ 90 + 360 / 12 * currentTime.hour + 360 / 12 / 60 * currentTime.min + 360 / 12 / 60 / 60 * currentTime.second }deg)`;
+      hands.min.style.transform = `rotate(${ 90 + 360 / 60 * currentTime.min + 360 / 60 / 60 * currentTime.second }deg)`;
+      hands.second.style.transform = `rotate(${ 90 + 360 / 60 * currentTime.second }deg)`;
+    }
+
+    window.onload = () => {
+      getTime();
+      setClockStyle();
+
+      setInterval(() => {
+        getTime();
+        setClockStyle();
+      }, 1000);
+    }
 
   </script>
 </body>
