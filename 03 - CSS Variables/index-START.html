@@ -22,9 +22,11 @@
 
   <style>
 
-    /*
-      misc styles, nothing to do with CSS variables
-    */
+    :root {
+      --spacing: 10;
+      --blur: 10;
+      --base: #ffc600;
+    }
 
     body {
       text-align: center;
@@ -42,9 +44,25 @@
     input {
       width: 100px;
     }
+
+    img {
+      padding: var(--spacing);
+      filter: blur(var(--blur));
+      background: var(--base);
+    }
   </style>
 
   <script>
+    const inputs = document.getElementsByTagName('input');
+
+    for (item of inputs) {
+      item.addEventListener('input', setCSS);
+    }
+
+    function setCSS() {
+      let unit = this.dataset.sizing || '';
+      document.documentElement.style.setProperty(`--${ this.name }`, document.getElementById(`${ this.name }`).value + unit);
+    }
   </script>
 
 </body>
