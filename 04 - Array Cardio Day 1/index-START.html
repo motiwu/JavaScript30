@@ -31,36 +31,68 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-    var ans1 = inventors.filter(element => element.year >= 1500 && element.year < 1600);
+    const ans1 = inventors.filter(element => element.year >= 1500 && element.year < 1600);
     console.log(ans1);
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
-    var ans2 = inventors.map(element => `${ element.first } ${ element.last }`);
+    const ans2 = inventors.map(element => `${ element.first } ${ element.last }`);
     console.log(ans2);
     
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
-    var ans3 = inventors.sort((a, b) => a.year - b.year);
+    const ans3 = inventors.sort((a, b) => a.year - b.year);
     console.log(ans3);
     
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+    const ans4 = inventors.reduce((total, element) => {
+      return total + (element.passed - element.year);
+    }, 0);
+    console.log(ans4);
+    
 
     // 5. Sort the inventors by years lived
+    const ans5 = inventors.sort((a, b) => {
+      return (a.passed - a.year) > (b.passed - b.year)? -1 : 1;
+    })
+    console.log(ans5);
+    
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // const ans6 = () => {
+    //   let category = document.querySelector('.mw-category');
+    //   let Boulevards = Array.from(category.querySelectorAll('a'));
+    //   let ans6 = Boulevards
+    //               .map(element => element.innerText)
+    //               .filter(text => text.includes('de'));
+    // }
+    // console.log(ans6());
 
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    const ans7 = people.sort((a, b) => {
+      let aname = a.split(', ');
+      let bname = b.split(', ');
+      
+      return aname[0] > bname[0]? 1 : -1;
+    })
+    console.log(ans7);
 
+    
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    const ans8 = data.reduce((obj, item) => {
+      obj[item] = obj[item]? obj[item] + 1 : 1;
+      return obj;
+    }, {})
+    console.log(ans8);
+    
 
   </script>
 </body>
